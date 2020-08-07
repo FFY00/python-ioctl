@@ -1,4 +1,4 @@
-# python-ioctl
+# python-ioctl ![checks](https://github.com/FFY00/python-ioctl/workflows/checks/badge.svg)
 
 Pure python typed ioctl implementation
 
