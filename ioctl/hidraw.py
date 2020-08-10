@@ -48,11 +48,10 @@ class Hidraw(object):
     HIDIOCGFEATURE = 0x07
     HIDIOCGRAWUNIQ = 0x08
 
-    HID_NAME_SIZE = 1024
-
-    def __init__(self, path: str) -> None:
+    def __init__(self, path: str, read_length: int = 1024) -> None:
         self._path = path
         self._fd = open(path, 'rb+')
+        self.read_length = read_length
         fcntl.fcntl(self._fd, fcntl.F_SETFL, os.O_NONBLOCK)
 
     def __str__(self) -> str:
@@ -120,7 +119,7 @@ class Hidraw(object):
         HID name of the hidraw node
         '''
         return ioctl.IOCTL.IOR(
-            'H', self.HIDIOCGRAWNAME, self.HID_NAME_SIZE
+            'H', self.HIDIOCGRAWNAME, self.read_length
         ).perform(self._fd).decode('utf-8').strip('\x00')
 
     @property
@@ -129,7 +128,7 @@ class Hidraw(object):
         Physical name of the hidraw node
         '''
         return ioctl.IOCTL.IOR(
-            'H', self.HIDIOCGRAWPHYS, self.HID_NAME_SIZE
+            'H', self.HIDIOCGRAWPHYS, self.read_length
         ).perform(self._fd).decode('utf-8').strip('\x00')
 
     @property
@@ -138,7 +137,7 @@ class Hidraw(object):
         Unique name of the hidraw node
         '''
         return ioctl.IOCTL.IOR(
-            'H', self.HIDIOCGRAWUNIQ, self.HID_NAME_SIZE
+            'H', self.HIDIOCGRAWUNIQ, self.read_length
         ).perform(self._fd).decode('utf-8').strip('\x00')
 
     # TODO: HIDIOCSFEATURE, HIDIOCGFEATURE
