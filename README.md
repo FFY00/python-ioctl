@@ -1,6 +1,11 @@
 # python-ioctl ![checks](https://github.com/FFY00/python-ioctl/workflows/checks/badge.svg)
 
-Pure python typed ioctl implementation
+Pure python typed Linux ioctl & ioctl interfaces implementation
+
+
+### Suported interfaces
+
+- hidraw
 
 
 ### Development
