@@ -39,6 +39,7 @@ class Hidraw(object):
     HIDIOCGRAWPHYS = 0x05
     HIDIOCSFEATURE = 0x06
     HIDIOCGFEATURE = 0x07
+    HIDIOCGRAWUNIQ = 0x08
 
     HID_NAME_SIZE = 1024
 
@@ -115,4 +116,22 @@ class Hidraw(object):
             'H', self.HIDIOCGRAWNAME, self.HID_NAME_SIZE
         ).perform(self._fd).decode('utf-8').strip('\x00')
 
-    # TODO: HIDIOCGRAWPHYS, HIDIOCSFEATURE, HIDIOCGFEATURE, HIDIOCGRAWUNIQ
+    @property
+    def phys(self) -> str:
+        '''
+        HID physical name of the hidraw node
+        '''
+        return ioctl.IOCTL.IOR(
+            'H', self.HIDIOCGRAWPHYS, self.HID_NAME_SIZE
+        ).perform(self._fd).decode('utf-8').strip('\x00')
+
+    @property
+    def uniq(self) -> str:
+        '''
+        HID unique identifier of the hidraw node
+        '''
+        return ioctl.IOCTL.IOR(
+            'H', self.HIDIOCGRAWUNIQ, self.HID_NAME_SIZE
+        ).perform(self._fd).decode('utf-8').strip('\x00')
+
+    # TODO: HIDIOCSFEATURE, HIDIOCGFEATURE
