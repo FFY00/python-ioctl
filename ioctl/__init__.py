@@ -6,6 +6,9 @@ import fcntl
 from typing import BinaryIO, Optional, Union
 
 
+__all__ = ['IOCTL']
+
+
 class IOCTL(object):
     '''
     Constructs and performs ioctl(s)
