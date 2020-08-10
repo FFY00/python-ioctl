@@ -95,7 +95,7 @@ class Hidraw(object):
 
         ioctl.IOCTL.IOR(
             'H', self.HIDIOCGRDESC, ctypes.sizeof(HidrawReportDescriptor)
-        ).perform(self._fd, buf=buf)
+        ).perform(self._fd, buf)
 
         ret = HidrawReportDescriptor.from_buffer(buf)
         return list(ret.value)[:ret.size]
