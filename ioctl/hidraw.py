@@ -5,7 +5,7 @@ import ctypes
 import fcntl
 import os
 
-from typing import BinaryIO, List, Tuple
+from typing import List, Tuple
 
 import ioctl
 
@@ -50,7 +50,7 @@ class Hidraw(object):
 
     def __init__(self, path: str, read_length: int = 1024) -> None:
         self._path = path
-        self._fd = open(path, 'rb+')
+        self._fd = os.open(path, os.O_RDWR)
         self.read_length = read_length
         fcntl.fcntl(self._fd, fcntl.F_SETFL, os.O_NONBLOCK)
 
@@ -65,7 +65,7 @@ class Hidraw(object):
         return self._path
 
     @property
-    def fd(self) -> BinaryIO:
+    def fd(self) -> int:
         '''
         Node file descriptor
         '''

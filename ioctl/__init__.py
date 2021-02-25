@@ -3,7 +3,7 @@
 import array
 import fcntl
 
-from typing import BinaryIO, Optional, Union
+from typing import Optional, Union
 
 
 __all__ = ['IOCTL']
@@ -50,7 +50,7 @@ class IOCTL(object):
             (size << self.SIZESHIFT)
         )
 
-    def perform(self, fd: BinaryIO, buf: Optional[Union[str, bytes, 'array.array[int]']] = None) -> bytearray:
+    def perform(self, fd: int, buf: Optional[Union[str, bytes, 'array.array[int]']] = None) -> bytearray:
         '''
         Performs the ioctl
         '''
