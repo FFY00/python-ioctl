@@ -16,4 +16,6 @@ if __name__ == '__main__':
     print(f'Physical Name: {d.phys}')
     print(f'Unique Name: {d.uniq or "None"}')
     print(f'Report Descriptor Size: {d.report_descriptor_size}')
-    print(f'Report Descriptor: {d.report_descriptor}')
+    print('Report Descriptor: {}'.format(
+        ' '.join(f'{byte:02x}' for byte in d.report_descriptor)
+    ))
