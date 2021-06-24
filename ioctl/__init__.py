@@ -6,7 +6,8 @@ import fcntl
 from typing import Optional, Union
 
 
-__all__ = ['IOCTL']
+__version__ = '0.2.1'
+__all__ = ['__version__', 'IOCTL']
 
 
 class IOCTL(object):
