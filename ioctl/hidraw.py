@@ -2,7 +2,6 @@
 
 import array
 import ctypes
-import fcntl
 import os
 
 from typing import List, Tuple
@@ -52,7 +51,6 @@ class Hidraw(object):
         self._path = path
         self._fd = os.open(path, os.O_RDWR)
         self.read_length = read_length
-        fcntl.fcntl(self._fd, fcntl.F_SETFL, os.O_NONBLOCK)
 
     def __str__(self) -> str:
         return f'Hidraw({self.path})'
